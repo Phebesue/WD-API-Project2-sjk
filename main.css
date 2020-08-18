@@ -1,0 +1,61 @@
+body {
+  /* height:100%; */
+  width: 100%;
+  margin: 0;
+  /* background-color: black; */
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  background-color: rgba(29, 31, 156, 0.829);
+}
+h1 {
+  color: white;
+  margin-bottom: 0;
+}
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  margin: 0 0;
+  justify-content: center;
+  min-height: 600px;
+}
+main {
+  justify-content: center;
+  text-align: center;
+}
+
+#library {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.library-projects {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card {
+  width: 200px;
+  justify-content: center;
+  margin: 5px;
+  padding-top: 0;
+}
+
+.card.library-img {
+  align-self: flex-start;
+}
+.item-title {
+  height: 80px;
+  overflow: hidden;
+}
+
+.library-item {
+  margin: 3vh;
+}
+.library-img {
+  width: 200px;
+  height: 200px;
+}
