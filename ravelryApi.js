@@ -1,5 +1,3 @@
-// require("dotenv").config();
-
 /* API Documentation: https://www.ravelry.com/api
 
 https://www.ravelry.com/pro/sjk-designs/apps
@@ -33,7 +31,7 @@ let authPassword2 = "gG/JEc/9GIZbW2XSGomyOZ/Q7AsV1QwbvioCDCJD";
 let authPassword3 = "mFqEQWo6VXaNQ-o9vJrvJLP6C9yl5BtrPlUxwv_Y";
 let username = "phebesue75";
 
-// let url = `https://api.ravelry.com/people/ ${process.env.username}/library/search.json`;
+// let url = `https://api.ravelry.com/projects/${username}/list.json`;
 let url = `https://api.ravelry.com/people/${username}/library/search.json`;
 console.log(url);
 let rApiGet = async function (url) {
@@ -60,6 +58,7 @@ let r = rApiGet(url).then((res) => {
 });
 
 function displayData(passedData) {
+  console.log(passedData);
   let libraryDiv = document.getElementById("library");
 
   let pageWrapper = document.createElement("div");
@@ -76,7 +75,7 @@ function displayData(passedData) {
     console.log(element);
 
     let box = document.createElement("div");
-    let inner = document.createElement("div"); /* Flip-card*/
+    let inner = document.createElement("div"); /*Flip-card*/
     let front = document.createElement("div"); /*Flip-card*/
     let img = document.createElement("img");
     let body = document.createElement("div");
@@ -106,10 +105,10 @@ function displayData(passedData) {
 
     // -----  Flip Card-----
     libraryDiv.appendChild(box);
-    box.append(inner);
-    inner.append(front);
-    front.append(img);
-    inner.append(body);
+    box.appendChild(inner);
+    inner.appendChild(front);
+    front.appendChild(img);
+    inner.appendChild(body);
 
     box.classList.add("flip-card");
     inner.classList.add("flip-card-inner");
@@ -120,7 +119,8 @@ function displayData(passedData) {
     img.src = element.square_image_url;
 
 
-    // img.style.borderRadius = "25px  25px 0 0";
+    img.style.borderRadius = "25px";
+    img.alt = "Project Image is Missing";
     title.innerText = element.title;
     author.textContent = `by:  ${element.author_name}`;
     dateAdd.innerText = element.created_at;

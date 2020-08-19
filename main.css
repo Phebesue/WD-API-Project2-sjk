@@ -4,32 +4,28 @@ font-family: 'Kalam', cursive;
 font-family: 'Roboto', sans-serif;
 font-family: 'Prompt', sans-serif; */
 
-
 body {
   /* height:100%; */
   width: 100vw;
   overflow-x: hidden;
   margin: 0;
-  /* background-color: black; */
-  /* background-image: linear-gradient(#fc8b85, #FA4083); */
   background-image: linear-gradient(#fc8b85, #4d0257);
-  font-family: 'Roboto', sans-serif;
-  /* font-weight: 700; */
+  font-family: "Roboto", sans-serif;
 }
-
 header {
   width: 100%;
   text-align: center;
   background-color: black;
-  padding:25px;
-  font-family: 'Prompt', sans-serif;
+  padding: 25px;
+  font-family: "Prompt", sans-serif;
 }
-h1,h2 {
+h1,
+h2 {
   color: white;
   margin-bottom: 0;
 }
-main h1{
-  font-family: 'Kalam', cursive;
+main h1 {
+  font-family: "Kalam", cursive;
 }
 .wrapper {
   margin-left: auto;
@@ -43,7 +39,6 @@ main {
   justify-content: center;
   text-align: center;
 }
-
 #library {
   display: flex;
   flex-wrap: wrap;
@@ -61,15 +56,14 @@ main {
   padding-top: 0;
   border-radius: 25px;
 }
-.title {  
-  overflow: hidden;  
-  /* font-family: 'Architects Daughter', cursive; */
-  font-family: 'Kalam', cursive;
+.title {
+  overflow: hidden;
+  font-family: "Kalam", cursive;
   font-weight: 500;
 }
-.card-body{ 
-  font-family: 'Roboto', sans-serif; 
-} 
+.card-body {
+  font-family: "Roboto", sans-serif;
+}
 .library-item {
   margin: 2vh;
 }
@@ -85,7 +79,6 @@ img {
   background-color: transparent;
   width: 200px;
   height: 200px;
-  /* border: 1px solid #f1f1f1; */
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -97,16 +90,17 @@ img {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+/* Do a horizontal flip when you move the mouse over the flip box container */
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
+  /* transform: rotateX(180deg); */
 }
 
 /* Position the front and back side */
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -116,16 +110,17 @@ img {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color:#bbbbbb34;
+  background-color: #bbbbbb34;
   color: black;
+  border-radius: 25px;
 }
-
-
 
 /* Style the back side */
 .flip-card-back {
-  background-color: #bbbbbb75;
+  background-color: #bbbbbb56;
   color: white;
   transform: rotateY(180deg);
-  padding:15px;
+  /* transform: rotateX(180deg); */
+  padding: 15px;
+  border-radius: 25px;
 }
