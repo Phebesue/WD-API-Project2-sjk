@@ -1,5 +1,5 @@
 {
-  "hosting": {
+  "site": "wd-api2-sjk",
     "public": "./",
     "ignore": [
       "firebase.json",
@@ -7,4 +7,4 @@
       "**/node_modules/**"
     ]
   }
-}
+
