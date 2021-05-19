@@ -31,7 +31,7 @@ let r = rApiGet(url).then((res) => {
 });
 
 function displayData(passedData) {
-  // console.log(passedData);
+  console.log(passedData);
   let libraryDiv = document.getElementById("library");
 
   let pageWrapper = document.createElement("div");
