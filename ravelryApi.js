@@ -23,8 +23,8 @@ let rApiGet = async function (url) {
   const json = await response.json();
 
   if (debugFunction) debugFunction(json);
-  return json;
   displayData(json);
+  return json;
 };
 let r = rApiGet(url).then((res) => {
   displayData(res);
