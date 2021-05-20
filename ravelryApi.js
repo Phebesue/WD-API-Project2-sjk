@@ -38,17 +38,16 @@ function displayData(passedData) {
   // let pageWrapper = document.createElement("div");
 
   let items = passedData.volumes;
-let i=0;
+  let i = 0;
   // for (let i=1; i <= items.length; i++){
   items.forEach((element) => {
     i++;
-    console.log(i, element);
+    // console.log(i, element);
 
-      
-      let box = document.createElement("div");
-      let inner = document.createElement("div"); /*Flip-card*/
-      let front = document.createElement("div"); /*Flip-card*/
-      let img = document.createElement("img");
+    let box = document.createElement("div");
+    let inner = document.createElement("div"); /*Flip-card*/
+    let front = document.createElement("div"); /*Flip-card*/
+    let img = document.createElement("img");
     let body = document.createElement("div");
     let title = document.createElement("h5");
     let author = document.createElement("p");
@@ -66,7 +65,7 @@ let i=0;
     inner.appendChild(front);
     front.appendChild(img);
     inner.appendChild(body);
-    
+
     box.classList.add("flip-card");
     inner.classList.add("flip-card-inner");
     front.classList.add("flip-card-front");
