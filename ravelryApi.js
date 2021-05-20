@@ -1,5 +1,5 @@
 /* API Documentation: https://www.ravelry.com/api
-*/
+ */
 
 let authUsername3 = "b047c350991e823b4b0a5e44f1957bee";
 
@@ -7,7 +7,7 @@ let authPassword3 = "mFqEQWo6VXaNQ-o9vJrvJLP6C9yl5BtrPlUxwv_Y";
 let username = "phebesue75";
 
 let url = `https://api.ravelry.com/people/${username}/library/search.json`;
-// console.log(url);
+console.log(url);
 let rApiGet = async function (url) {
   const headers = new Headers();
   const debugFunction = this.debugFunction;
@@ -21,10 +21,11 @@ let rApiGet = async function (url) {
 
   const response = await fetch(url, { method: "GET", headers: headers });
   const json = await response.json();
+  console.log(json);
 
   if (debugFunction) debugFunction(json);
-  displayData(json)
-  return json
+  // displayData(json);
+  return json;
 };
 let r = rApiGet(url).then((res) => {
   displayData(res);
@@ -34,25 +35,29 @@ function displayData(passedData) {
   console.log(passedData);
   let libraryDiv = document.getElementById("library");
 
-  let pageWrapper = document.createElement("div");
+  // let pageWrapper = document.createElement("div");
 
   let items = passedData.volumes;
-
+let i=0;
+  // for (let i=1; i <= items.length; i++){
   items.forEach((element) => {
-    // console.log(element);
+    i++;
+    console.log(i, element);
 
-    let box = document.createElement("div");
-    let inner = document.createElement("div"); /*Flip-card*/
-    let front = document.createElement("div"); /*Flip-card*/
-    let img = document.createElement("img");
+      
+      let box = document.createElement("div");
+      let inner = document.createElement("div"); /*Flip-card*/
+      let front = document.createElement("div"); /*Flip-card*/
+      let img = document.createElement("img");
     let body = document.createElement("div");
     let title = document.createElement("h5");
     let author = document.createElement("p");
     let dateAdd = document.createElement("p");
     libraryDiv.appendChild(box);
-        body.append(title);
+    body.append(title);
     body.append(author);
-        box.classList.add("library-item");
+    box.classList.add("library-item");
+    box.classList.add(i);
     img.src = element.square_image_url;
 
     // -----  Flip Card-----
@@ -61,19 +66,20 @@ function displayData(passedData) {
     inner.appendChild(front);
     front.appendChild(img);
     inner.appendChild(body);
-
+    
     box.classList.add("flip-card");
     inner.classList.add("flip-card-inner");
     front.classList.add("flip-card-front");
     body.classList.add("flip-card-back");
     title.classList.add("title");
-// Assigning src to img
+    // Assigning src to img
     img.src = element.square_image_url;
-// styling img
+    // styling img
     img.style.borderRadius = "25px";
     img.alt = "Project Image is Missing";
     // assigning content to elements
     title.innerText = element.title;
-    author.textContent = `by:  ${element.author_name}`;  
+    author.textContent = `by:  ${element.author_name}`;
   });
 }
+// }
