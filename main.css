@@ -20,7 +20,7 @@ header {
   font-family: "Prompt", sans-serif;
 }
 h1,
-h2 {
+h2,h3 {
   color: white;
   margin-bottom: 0;
 }
@@ -34,10 +34,15 @@ main h1 {
   margin: 0 0;
   justify-content: center;
   min-height: 600px;
+  text-align: center;
 }
 main {
   justify-content: center;
   text-align: center;
+}
+nav{
+  display:flex;
+  justify-content: space-evenly;
 }
 #library {
   display: flex;

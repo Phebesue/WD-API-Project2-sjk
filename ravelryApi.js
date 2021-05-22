@@ -1,14 +1,23 @@
 /* API Documentation: https://www.ravelry.com/api
  */
+//  *-----Access the DOM-----
+const nextBtn = document.querySelector(".next");
+const previousBtn = document.querySelector(".prev");
+const nav = document.querySelector("nav");
 
+//  *-----Initial Variables-----
+let page = 1;
 let authUsername3 = "b047c350991e823b4b0a5e44f1957bee";
 
 let authPassword3 = "mFqEQWo6VXaNQ-o9vJrvJLP6C9yl5BtrPlUxwv_Y";
 let username = "phebesue75";
 
-let url = `https://api.ravelry.com/people/${username}/library/search.json`;
+let url = `https://api.ravelry.com/people/${username}/library/search.json?page=${page}`;
 console.log(url);
-let rApiGet = async function (url) {
+console.log(page);
+
+
+let rApiGet = async (url) => {
   const headers = new Headers();
   const debugFunction = this.debugFunction;
   // This is the HTTP header that you need add in order to access api.ravelry.com with a read only API key
@@ -18,15 +27,14 @@ let rApiGet = async function (url) {
     "Authorization",
     "Basic " + btoa(authUsername3 + ":" + authPassword3)
   );
-
   const response = await fetch(url, { method: "GET", headers: headers });
   const json = await response.json();
-  console.log(json);
-
+  // console.log(json);
+  
   if (debugFunction) debugFunction(json);
-  // displayData(json);
   return json;
 };
+
 let r = rApiGet(url).then((res) => {
   displayData(res);
 });
@@ -34,12 +42,17 @@ let r = rApiGet(url).then((res) => {
 function displayData(passedData) {
   console.log(passedData);
   let libraryDiv = document.getElementById("library");
+  let pageWrapper = document.querySelector(".pages");
 
-  // let pageWrapper = document.createElement("div");
+  pageWrapper.textContent = `${passedData.paginator.page} of ${passedData.paginator.last_page} pages`;
+
+  while (libraryDiv.firstChild) {
+    libraryDiv.removeChild(libraryDiv.firstChild);
+  }
 
   let items = passedData.volumes;
   let i = 0;
-  // for (let i=1; i <= items.length; i++){
+
   items.forEach((element) => {
     i++;
     // console.log(i, element);
@@ -51,7 +64,7 @@ function displayData(passedData) {
     let body = document.createElement("div");
     let title = document.createElement("h5");
     let author = document.createElement("p");
-    let dateAdd = document.createElement("p");
+    // let dateAdd = document.createElement("p");
     libraryDiv.appendChild(box);
     body.append(title);
     body.append(author);
@@ -80,5 +93,33 @@ function displayData(passedData) {
     title.innerText = element.title;
     author.textContent = `by:  ${element.author_name}`;
   });
+
+  if (page <= 1) { // tests if pageNumber is 1
+    previousBtn.style.display = "none"; //if pageNumber is 1, hide the prevBtn
+    if (items.length <= 100) { //tests if there are 100 or less articles
+      nav.style.display = "block";
+    } else {
+      nav.style.display = "none"; //hide nav if there are 100 or less results
+    }
+  }  else{
+      previousBtn.style.display = "block";
+    }
 }
-// }
+
+let nextPage = (e) => {
+  page++;
+  rApiGet();
+  console.log("Page Number:", page);
+};
+
+let previousPage = (e) => {
+  if (page > 1) {
+    page--;
+    console.log("Page Number:", page);
+  } else {
+    return;
+  }
+  rApiGet();
+};
+nextBtn.addEventListener("click", nextPage);
+previousBtn.addEventListener("click", previousPage);
