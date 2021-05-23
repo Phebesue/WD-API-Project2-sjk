@@ -7,15 +7,17 @@ const nav = document.querySelector("nav");
 
 //  *-----Initial Variables-----
 let page = 1;
+let patternId = "rose-hill-wrap";
+// let patternId= 956672;
 let authUsername3 = "b047c350991e823b4b0a5e44f1957bee";
 
 let authPassword3 = "mFqEQWo6VXaNQ-o9vJrvJLP6C9yl5BtrPlUxwv_Y";
 let username = "phebesue75";
 
 let url = `https://api.ravelry.com/people/${username}/library/search.json?page=${page}`;
+
 console.log(url);
 console.log(page);
-
 
 let rApiGet = async (url) => {
   const headers = new Headers();
@@ -27,10 +29,10 @@ let rApiGet = async (url) => {
     "Authorization",
     "Basic " + btoa(authUsername3 + ":" + authPassword3)
   );
-  const response = await fetch(url, { method: "GET", headers: headers });
-  const json = await response.json();
+  let response = await fetch(url, { method: "GET", headers: headers });
+  let json = await response.json();
   // console.log(json);
-  
+
   if (debugFunction) debugFunction(json);
   return json;
 };
@@ -64,10 +66,12 @@ function displayData(passedData) {
     let body = document.createElement("div");
     let title = document.createElement("h5");
     let author = document.createElement("p");
-    // let dateAdd = document.createElement("p");
+    let dateAdd = document.createElement("p");
+    let pLink = document.createElement("a");
     libraryDiv.appendChild(box);
     body.append(title);
     body.append(author);
+    body.append(dateAdd);
     box.classList.add("library-item");
     box.classList.add(i);
     img.src = element.square_image_url;
@@ -76,14 +80,16 @@ function displayData(passedData) {
     libraryDiv.appendChild(box);
     box.appendChild(inner);
     inner.appendChild(front);
+    inner.appendChild(pLink);
     front.appendChild(img);
-    inner.appendChild(body);
+    pLink.appendChild(body);
 
     box.classList.add("flip-card");
     inner.classList.add("flip-card-inner");
     front.classList.add("flip-card-front");
     body.classList.add("flip-card-back");
     title.classList.add("title");
+    author.classList.add("author");
     // Assigning src to img
     img.src = element.square_image_url;
     // styling img
@@ -91,19 +97,36 @@ function displayData(passedData) {
     img.alt = "Project Image is Missing";
     // assigning content to elements
     title.innerText = element.title;
+    let nDate = element.created_at;
+    let date = nDate.substr(0, 10);
+    // console.log(date);
+    let lTitle = element.title;
+    // console.log(lTitle);
+    let patt = /[^A-z]/g;
+    let sourceTitle = lTitle.toString().toLowerCase().replace(patt, "-");
+    let patternUrl = `https://api.ravelry.com/patterns/library/${sourceTitle}`;
+    console.log(patternUrl);
+    console.log(i, patternUrl);
+    pLink.href = patternUrl;
+    pLink.target = "_blank";
+    dateAdd.classList.add("date");
+    dateAdd.textContent = `added: ${date}`;
     author.textContent = `by:  ${element.author_name}`;
   });
+  // let date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
 
-  if (page <= 1) { // tests if pageNumber is 1
+  if (page <= 1) {
+    // tests if pageNumber is 1
     previousBtn.style.display = "none"; //if pageNumber is 1, hide the prevBtn
-    if (items.length <= 100) { //tests if there are 100 or less articles
+    if (items.length <= 100) {
+      //tests if there are 100 or less articles
       nav.style.display = "block";
     } else {
       nav.style.display = "none"; //hide nav if there are 100 or less results
     }
-  }  else{
-      previousBtn.style.display = "block";
-    }
+  } else {
+    previousBtn.style.display = "block";
+  }
 }
 
 let nextPage = (e) => {
